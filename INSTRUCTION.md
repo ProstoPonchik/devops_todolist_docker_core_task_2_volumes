@@ -22,14 +22,14 @@ Get the MySQL container IP:
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql-local
 ```
 
-Use this IP in `todolist/settings.py` as the database `HOST`.
+Use this IP as the `MYSQL_HOST` value when building the app image.
 
 ## Run the App Container
 
 Build the app image:
 
 ```bash
-docker build -t todoapp:2.0.0 .
+docker build --build-arg MYSQL_HOST=172.17.0.2 -t todoapp:2.0.0 .
 ```
 
 Run the app container:
